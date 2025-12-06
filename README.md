@@ -28,7 +28,7 @@ Proyek ini dibangun dengan fokus pada pengalaman pengguna yang responsif dan efi
 ![Settings Screenshot](/src/images/settings.png) 
 -----
 <!-- GitHub README.md tidak mendukung pemutaran video MP4 secara langsung. Anda bisa menautkan ke file MP4, tetapi pengguna perlu mengunduh atau membukanya di tab baru. Untuk pemutaran otomatis, pertimbangkan GIF atau tautan ke platform video eksternal. -->
-[Lihat Demo Mobile (GIF)](src/images/demo.gif)
+![Lihat Demo Mobile (GIF)](src/images/demo.gif)
 
 ## 3. Features
 
