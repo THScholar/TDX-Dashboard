@@ -56,7 +56,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
       `}>
         <div className="p-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            {storeName}
+            Dashboard
+            <span className="block text-base font-semibold text-slate-400">{storeName}</span>
           </h1>
           <button onClick={toggleSidebar} className="md:hidden text-slate-400">
             <X size={24} />
