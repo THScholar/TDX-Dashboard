@@ -1,13 +1,13 @@
 import { SaleRecord, ChatMessage } from "../types";
-import { getStoreProfile } from "./storageService";
+import { getStoreProfile, checkMessageLimit, incrementMessageCount } from "./storageService";
 
 // OPENROUTER CONFIGURATION
-const OPENROUTER_API_KEY = process.env.API_KEY;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
 const SITE_NAME = "TherraBiz Dashboard";
 
 // Model configuration - utilizing Google's model via OpenRouter as default
-export const MODEL_NAME = "google/gemini-2.0-flash-001";
+export const MODEL_NAME = "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
 
 // Helper function to call OpenRouter API
 const callOpenRouter = async (messages: any[], temperature: number = 0.7) => {
@@ -54,6 +54,10 @@ export const getGeminiChatResponse = async (
   userName: string = "Owner"
 ): Promise<string> => {
   try {
+    if (checkMessageLimit()) {
+      return "Maaf, Anda telah melebihi batas pesan harian (50 pesan). Silakan coba lagi besok.";
+    }
+    incrementMessageCount();
     const profile = getStoreProfile();
     
     // 1. System Prompt

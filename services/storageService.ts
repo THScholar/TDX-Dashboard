@@ -175,4 +175,51 @@ export const saveInventoryRecord = (record: InventoryRecord) => {
   const updated = [...current, record];
   localStorage.setItem(INVENTORY_KEY, JSON.stringify(updated));
   return updated;
+}
+
+// --- Message Tracking Logic (Anti-Spam) ---
+const MESSAGE_TRACKER_KEY = 'therrabiz_message_tracker';
+const DAILY_MESSAGE_LIMIT = 50;
+
+// Check if user has exceeded daily message limit
+export const checkMessageLimit = (): boolean => {
+  try {
+    const tracker = localStorage.getItem(MESSAGE_TRACKER_KEY);
+    if (!tracker) return false;
+
+    const { count, lastReset } = JSON.parse(tracker);
+    const today = new Date().setHours(0, 0, 0, 0);
+
+    // Reset count if new day
+    if (lastReset < today) return false;
+
+    return count >= DAILY_MESSAGE_LIMIT;
+  } catch (error) {
+    console.error("Failed to check message limit", error);
+    return false;
+  }
+}
+
+// Increment message count and update tracker
+export const incrementMessageCount = () => {
+  try {
+    const tracker = localStorage.getItem(MESSAGE_TRACKER_KEY);
+    const today = new Date().setHours(0, 0, 0, 0);
+
+    let updatedTracker;
+    if (tracker) {
+      const { count, lastReset } = JSON.parse(tracker);
+      if (lastReset < today) {
+        updatedTracker = { count: 1, lastReset: today };
+      } else {
+        updatedTracker = { count: count + 1, lastReset };
+      }
+    } else {
+      updatedTracker = { count: 1, lastReset: today };
+    }
+
+    localStorage.setItem(MESSAGE_TRACKER_KEY, JSON.stringify(updatedTracker));
+  } catch (error) {
+    console.error("Failed to increment message count", error);
+  }
 };
