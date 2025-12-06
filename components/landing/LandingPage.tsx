@@ -94,29 +94,7 @@ export const LandingPage: React.FC = () => {
             </a>
           </div>
 
-          {/* Dashboard Preview Mockup */}
-          <div className="mt-20 mx-auto max-w-6xl relative animate-in fade-in zoom-in-95 duration-1000 delay-300">
-             <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-blue-600 rounded-2xl blur opacity-20"></div>
-             <div className="relative rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]">
-                <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop" 
-                  alt="Dashboard Preview" 
-                  className="w-full h-full object-cover opacity-50 mix-blend-overlay"
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/60 backdrop-blur-[2px]">
-                   <p className="text-primary-400 font-mono mb-2 text-sm tracking-widest uppercase">Live Demo Preview</p>
-                   <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">Real-time Analytics</h3>
-                   <div className="flex gap-4">
-                      <div className="px-4 py-2 bg-slate-800/80 rounded-lg border border-slate-700 text-xs text-slate-300 flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Sales: +12%
-                      </div>
-                      <div className="px-4 py-2 bg-slate-800/80 rounded-lg border border-slate-700 text-xs text-slate-300 flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div> Insight AI: Ready
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
+
         </div>
       </section>
 
