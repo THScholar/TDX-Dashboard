@@ -76,8 +76,8 @@ export const AiChat: React.FC = () => {
   return (
     <div className="h-[75vh] min-h-[500px] flex flex-col bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl">
       <div className="p-4 border-b border-slate-700 bg-slate-900/50 flex items-center gap-3">
-        <div className="bg-primary-500/20 p-2 rounded-lg">
-          <img src="/therra.png" alt="Therra AI" className="w-6 h-6 object-contain" />
+        <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-primary-600/20">
+          <img src="/src/images/Therra.png" alt="Therra AI" className="w-full h-full object-cover rounded-full" />
         </div>
         <div>
           <h3 className="font-semibold text-slate-100">Therra AI Assistant</h3>
@@ -98,7 +98,7 @@ export const AiChat: React.FC = () => {
               {msg.role === 'user' ? (
                 <User size={14} />
               ) : (
-                <img src="/therra.png" alt="AI" className="w-full h-full object-cover" />
+                <img src="/src/images/Therra.png" alt="AI" className="w-full h-full object-cover" />
               )}
             </div>
             <div className={`
