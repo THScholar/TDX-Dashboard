@@ -66,12 +66,12 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal di sistem Anda:
     # atau
     yarn install
     ```
-3.  **Konfigurasi Environment (jika ada):**
-    Buat file `.env` di root proyek dan tambahkan variabel lingkungan yang diperlukan. Contoh:
+3.  **Konfigurasi Environment:**
+    Buat file `.env` di root proyek dan tambahkan variabel lingkungan berikut:
     ```
-    VITE_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+    VITE_OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
     ```
-    *(Ganti `YOUR_GEMINI_API_KEY` dengan kunci API Gemini Anda jika fitur AI diaktifkan.)*
+    *(Ganti `YOUR_OPENROUTER_API_KEY` dengan kunci API OpenRouter Anda.)*
 
 ### Menjalankan Aplikasi
 
