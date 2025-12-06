@@ -3,7 +3,7 @@ import { getOpenRouterChatResponse } from '../../services/openRouterService';
 import { getUserName } from '../../services/storageService';
 import { ChatMessage } from '../../types';
 import { Button } from '../Button';
-import { Send, User } from 'lucide-react';
+import { Send, User, Bot } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Sparkles } from 'lucide-react';
 
@@ -82,7 +82,7 @@ export const AiChat: React.FC = () => {
         <>
           <div className="p-4 border-b border-slate-700 bg-slate-900/50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-primary-600/20">
-              <img src="../../images/therra.png" alt="Therra AI Assistant" className="w-full h-full object-cover rounded-full" />
+              <Bot size={18} className="text-white" />
             </div>
             <div>
               <h3 className="font-semibold text-slate-100">Therra AI Assistant</h3>
@@ -103,7 +103,7 @@ export const AiChat: React.FC = () => {
                   {msg.role === 'user' ? (
                     <User size={14} />
                   ) : (
-                    <img src="/src/images/Therra.png" alt="AI" className="w-full h-full object-cover" />
+                    <Bot size={14} />
                   )}
                 </div>
                 <div className={`
