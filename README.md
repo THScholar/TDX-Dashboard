@@ -57,7 +57,7 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal di sistem Anda:
 
 1.  **Clone repositori:**
     ```bash
-    git clone https://github.com/THScholar/TDX-Dashboard # Ganti dengan URL repo Anda
+    git clone https://github.com/THScholar/TDX-Dashboard
     cd TDX
     ```
 2.  **Instal dependensi:**
