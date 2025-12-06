@@ -26,7 +26,7 @@ export const LandingPage: React.FC = () => {
           </Link>
           
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Link to="/login">
+            <Link to="/login" className="hidden md:block">
               <button className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-800 font-medium rounded-xl text-sm px-5 py-2.5 text-center transition-all shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40">
                 Masuk Dashboard
               </button>
@@ -45,6 +45,9 @@ export const LandingPage: React.FC = () => {
               <li><a href="#how-it-works" onClick={handleNavClick} className="block py-2 px-3 text-slate-300 hover:text-primary-400 md:p-0 transition-colors">Cara Kerja</a></li>
               <li><a href="#comparison" onClick={handleNavClick} className="block py-2 px-3 text-slate-300 hover:text-primary-400 md:p-0 transition-colors">Keunggulan</a></li>
               <li><a href="#faq" onClick={handleNavClick} className="block py-2 px-3 text-slate-300 hover:text-primary-400 md:p-0 transition-colors">FAQ</a></li>
+              <li className="md:hidden">
+                <Link to="/login" onClick={handleNavClick} className="block py-2 px-3 text-white bg-primary-600 hover:bg-primary-700 rounded-lg text-center mt-4">Masuk Dashboard</Link>
+              </li>
             </ul>
           </div>
         </div>
