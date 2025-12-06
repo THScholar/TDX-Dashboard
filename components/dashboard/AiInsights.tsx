@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getSalesData } from '../../services/storageService';
-import { generateBusinessInsights } from '../../services/geminiService';
+import { generateOpenRouterBusinessInsights } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { Sparkles, BarChart2 } from 'lucide-react';
 
@@ -19,7 +19,7 @@ export const AiInsights: React.FC = () => {
     }
 
     try {
-      const result = await generateBusinessInsights(data);
+      const result = await generateOpenRouterBusinessInsights(data);
       setInsight(result);
     } catch (error) {
       setInsight("Gagal mengambil insight. Pastikan koneksi internet lancar.");

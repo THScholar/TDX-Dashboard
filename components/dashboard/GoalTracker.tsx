@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSalesData, getSalesGoals, saveSalesGoal, SALES_UPDATE_EVENT } from '../../services/storageService';
-import { generateGoalAdvice } from '../../services/geminiService';
+import { generateOpenRouterGoalAdvice } from '../../services/openRouterService';
 import { Target, Lightbulb, Edit2 } from 'lucide-react';
 import { Button } from '../Button';
 
@@ -46,7 +46,7 @@ export const GoalTracker: React.FC = () => {
       const today = new Date().getDate();
       const daysLeft = daysInMonth - today;
       
-      const tip = await generateGoalAdvice(currentRevenue, target, daysLeft);
+      const tip = await generateOpenRouterGoalAdvice(currentRevenue, target, daysLeft);
       setAdvice(tip);
     }
   };

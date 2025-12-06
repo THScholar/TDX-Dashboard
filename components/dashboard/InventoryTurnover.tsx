@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { analyzeInventoryTurnover } from '../../services/geminiService';
+import { analyzeOpenRouterInventoryTurnover } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { Activity, ArrowRightCircle } from 'lucide-react';
 
@@ -18,7 +18,7 @@ export const InventoryTurnover: React.FC = () => {
     const rate = cogs / avgInv;
     
     try {
-      const advice = await analyzeInventoryTurnover(rate, "Bulan Ini");
+      const advice = await analyzeOpenRouterInventoryTurnover(rate, "Bulan Ini");
       setResult({ rate, advice });
     } catch (e) {
       console.error(e);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getSalesData } from '../../services/storageService';
-import { generateWhatIfAnalysis } from '../../services/geminiService';
+import { generateOpenRouterWhatIfAnalysis } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { BrainCircuit, PlayCircle } from 'lucide-react';
 
@@ -16,7 +16,7 @@ export const WhatIfAnalysis: React.FC = () => {
     setIsLoading(true);
     try {
       const data = getSalesData();
-      const result = await generateWhatIfAnalysis(data, scenario);
+      const result = await generateOpenRouterWhatIfAnalysis(data, scenario);
       setAnalysis(result);
     } catch (error) {
       setAnalysis("Gagal melakukan simulasi.");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DailyTask } from '../../types';
 import { getDailyTasks, saveDailyTasks, getSalesData } from '../../services/storageService';
-import { generateSuggestedTasks } from '../../services/geminiService';
+import { generateOpenRouterSuggestedTasks } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { CheckCircle2, ListTodo, RefreshCw } from 'lucide-react';
 
@@ -21,7 +21,7 @@ export const TaskGenerator: React.FC = () => {
     setIsLoading(true);
     try {
       const sales = getSalesData();
-      const suggestions = await generateSuggestedTasks(sales);
+      const suggestions = await generateOpenRouterSuggestedTasks(sales);
       
       const newTasks: DailyTask[] = suggestions.map((text, idx) => ({
         id: Date.now().toString() + idx,

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { getGeminiChatResponse } from '../../services/geminiService';
+import { getOpenRouterChatResponse } from '../../services/openRouterService';
 import { getUserName } from '../../services/storageService';
 import { ChatMessage } from '../../types';
 import { Button } from '../Button';
@@ -57,7 +57,7 @@ export const AiChat: React.FC = () => {
 
     try {
       // Pass the userName to the service so the AI knows the context
-      const responseText = await getGeminiChatResponse(messages, userMsg.text, userName);
+      const responseText = await getOpenRouterChatResponse(messages, userMsg.text, userName);
       
       const botMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),

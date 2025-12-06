@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSalesData } from '../../services/storageService';
-import { analyzeSlowMovingItems } from '../../services/geminiService';
+import { analyzeOpenRouterSlowMovingItems } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { AlertTriangle, BarChart4, RefreshCw, Box } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export const SlowMovingPrediction: React.FC = () => {
     }
     
     try {
-      const resultJson = await analyzeSlowMovingItems(data);
+      const resultJson = await analyzeOpenRouterSlowMovingItems(data);
       const parsed = JSON.parse(resultJson);
       setPredictions(parsed);
     } catch (e) {

@@ -2,18 +2,18 @@ import { SaleRecord, ChatMessage } from "../types";
 import { getStoreProfile, checkMessageLimit, incrementMessageCount } from "./storageService";
 
 // OPENROUTER CONFIGURATION
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
 const SITE_NAME = "TherraBiz Dashboard";
 
-// Model configuration - utilizing Google's model via OpenRouter as default
-export const MODEL_NAME = "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
+// Model configuration - utilizing OpenAI's model via OpenRouter as default
+export const MODEL_NAME = "gpt-4o-mini";
 
 // Helper function to call OpenRouter API
 const callOpenRouter = async (messages: any[], temperature: number = 0.7) => {
   if (!OPENROUTER_API_KEY) {
     console.error("API Key is missing.");
-    throw new Error("API Key tidak ditemukan. Pastikan process.env.API_KEY sudah diset.");
+    throw new Error("API Key tidak ditemukan. Pastikan VITE_OPENROUTER_API_KEY sudah diset di file .env.");
   }
 
   try {
@@ -48,7 +48,7 @@ const callOpenRouter = async (messages: any[], temperature: number = 0.7) => {
 
 // --- Chat Service ---
 
-export const getGeminiChatResponse = async (
+export const getOpenRouterChatResponse = async (
   history: ChatMessage[],
   newMessage: string,
   userName: string = "Owner"
@@ -88,13 +88,12 @@ export const getGeminiChatResponse = async (
     return responseText || "Maaf, saya tidak dapat memproses permintaan saat ini.";
   } catch (error) {
     console.error("Chat Error:", error);
-    return "Terjadi kesalahan saat menghubungi Therra AI. Pastikan API Key valid.";
-  }
+    return "Terjadi kesalahan saat menghubungi Therra AI. Pastikan API Key valid.";  }
 };
 
 // --- Business Insights ---
 
-export const generateBusinessInsights = async (data: SaleRecord[]): Promise<string> => {
+export const generateOpenRouterBusinessInsights = async (data: SaleRecord[]): Promise<string> => {
   try {
     const dataString = JSON.stringify(data.slice(-20)); // Limit context
     const prompt = `
@@ -121,7 +120,7 @@ export const generateBusinessInsights = async (data: SaleRecord[]): Promise<stri
 
 // --- What-If Simulator ---
 
-export const generateWhatIfAnalysis = async (data: SaleRecord[], scenario: string): Promise<string> => {
+export const generateOpenRouterWhatIfAnalysis = async (data: SaleRecord[], scenario: string): Promise<string> => {
   try {
     const summary = JSON.stringify(data.slice(-10));
     const prompt = `
@@ -145,7 +144,7 @@ export const generateWhatIfAnalysis = async (data: SaleRecord[], scenario: strin
 
 // --- Daily Tasks ---
 
-export const generateSuggestedTasks = async (data: SaleRecord[]): Promise<string[]> => {
+export const generateOpenRouterSuggestedTasks = async (data: SaleRecord[]): Promise<string[]> => {
   try {
     const summary = JSON.stringify(data.slice(-7)); 
     const prompt = `
@@ -167,7 +166,7 @@ export const generateSuggestedTasks = async (data: SaleRecord[]): Promise<string
 
 // --- Goal Advice ---
 
-export const generateGoalAdvice = async (current: number, target: number, daysLeft: number): Promise<string> => {
+export const generateOpenRouterGoalAdvice = async (current: number, target: number, daysLeft: number): Promise<string> => {
   try {
     const prompt = `
       Target omzet bulan ini: Rp ${target}.
@@ -188,7 +187,7 @@ export const generateGoalAdvice = async (current: number, target: number, daysLe
 
 // --- NEW FEATURE 2: Slow Moving Prediction ---
 
-export const analyzeSlowMovingItems = async (data: SaleRecord[]): Promise<string> => {
+export const analyzeOpenRouterSlowMovingItems = async (data: SaleRecord[]): Promise<string> => {
   try {
     // Simplify data to list of products
     const productCounts: Record<string, number> = {};
@@ -222,7 +221,7 @@ export const analyzeSlowMovingItems = async (data: SaleRecord[]): Promise<string
 
 // --- NEW FEATURE 3: Expense Categorization ---
 
-export const categorizeExpenseAI = async (description: string, amount: number): Promise<string> => {
+export const categorizeOpenRouterExpenseAI = async (description: string, amount: number): Promise<string> => {
   try {
     const prompt = `
       Saya mengeluarkan uang sebesar Rp ${amount} untuk keperluan: "${description}".
@@ -249,7 +248,7 @@ export const categorizeExpenseAI = async (description: string, amount: number): 
 
 // --- NEW FEATURE 7: Inventory Turnover ---
 
-export const analyzeInventoryTurnover = async (turnoverRate: number, period: string): Promise<string> => {
+export const analyzeOpenRouterInventoryTurnover = async (turnoverRate: number, period: string): Promise<string> => {
   try {
     const prompt = `
       Inventory Turnover Rate (ITR) bisnis saya untuk periode ${period} adalah ${turnoverRate.toFixed(2)} kali.
@@ -269,7 +268,7 @@ export const analyzeInventoryTurnover = async (turnoverRate: number, period: str
 
 // --- NEW FEATURE 9: Promo Estimator ---
 
-export const estimatePromoImpact = async (promoType: string, productName: string, depth: string): Promise<string> => {
+export const estimateOpenRouterPromoImpact = async (promoType: string, productName: string, depth: string): Promise<string> => {
   try {
     const prompt = `
       Saya ingin membuat promo "${promoType}" untuk produk "${productName}" dengan detail "${depth}".

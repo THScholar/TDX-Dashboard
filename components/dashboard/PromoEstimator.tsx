@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { estimatePromoImpact } from '../../services/geminiService';
+import { estimateOpenRouterPromoImpact } from '../../services/openRouterService';
 import { Button } from '../Button';
 import { Tag, TrendingUp } from 'lucide-react';
 
@@ -16,7 +16,7 @@ export const PromoEstimator: React.FC = () => {
     
     setLoading(true);
     try {
-      const res = await estimatePromoImpact(promoType, product, detail);
+      const res = await estimateOpenRouterPromoImpact(promoType, product, detail);
       setResult(res);
     } catch (e) {
       console.error(e);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getExpenses, addExpense, EXPENSE_UPDATE_EVENT } from '../../services/storageService';
-import { categorizeExpenseAI } from '../../services/geminiService';
+import { categorizeOpenRouterExpenseAI } from '../../services/openRouterService';
 import { ExpenseRecord } from '../../types';
 import { Button } from '../Button';
 import { Wallet, PieChart as PieIcon, Plus } from 'lucide-react';
@@ -27,7 +27,7 @@ export const ExpenseTracker: React.FC = () => {
     setIsProcessing(true);
     try {
       // 1. Get Category from AI
-      const category = await categorizeExpenseAI(desc, Number(amount));
+      const category = await categorizeOpenRouterExpenseAI(desc, Number(amount));
       
       // 2. Save
       const newExp: ExpenseRecord = {
