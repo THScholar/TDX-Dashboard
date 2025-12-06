@@ -88,8 +88,9 @@ Aplikasi akan berjalan di `http://localhost:3000` (atau port lain yang dikonfigu
 
 Untuk login ke aplikasi, gunakan kredensial berikut:
 
-*   **Username**: `admin` (atau username lain yang Anda daftarkan)
-*   **Password**: `TherraBizDemo`
+*   **Nama Pemilik**: `[Nama Anda]`
+*   **Nama Toko**: `[Nama Toko Anda]`
+*   **Password**: `TherraBizDemo` (wajib)
 
 ### Build Produksi
 
