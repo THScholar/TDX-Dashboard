@@ -15,7 +15,7 @@ export const DashboardHome: React.FC = () => {
   const [revenueGrowth, setRevenueGrowth] = useState(0);
   const [currentTime, setCurrentTime] = useState(new Date());
   
-  const { layout } = useTheme();
+  const { layout, analyticsMode } = useTheme();
 
   const loadData = useCallback(() => {
     // 1. Load Data
@@ -143,16 +143,18 @@ export const DashboardHome: React.FC = () => {
               <Calendar size={16} /> Kelola Data
             </button>
           </Link>
-          <Link to="/dashboard/insight">
-            <button className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-primary-500/20 flex items-center gap-2">
-              <TrendingUp size={16} /> Analisis AI
-            </button>
-          </Link>
+          {analyticsMode !== 'basic' && (
+            <Link to="/dashboard/insight">
+              <button className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-primary-500/20 flex items-center gap-2">
+                <TrendingUp size={16} /> Analisis AI
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 
       {/* Main Stats Row */}
-      <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${layout === 'compact' ? 'gap-4' : ''}`}>
+      <div className={`grid gap-6 ${layout === 'compact' ? 'grid-cols-1 md:grid-cols-2 gap-4' : layout === 'analytic' ? 'grid-cols-1 md:grid-cols-4 gap-8' : 'grid-cols-1 md:grid-cols-3'}`}>
         <StatCard 
           title="Total Omzet" 
           value={`Rp ${totalRevenue.toLocaleString('id-ID')}`} 

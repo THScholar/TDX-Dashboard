@@ -6,9 +6,11 @@ interface ThemeContextType {
   theme: ThemeOption;
   layout: LayoutOption;
   analyticsMode: AnalyticsMode;
+  enableDummyData: boolean;
   setTheme: (theme: ThemeOption) => void;
   setLayout: (layout: LayoutOption) => void;
   setAnalyticsMode: (mode: AnalyticsMode) => void;
+  setEnableDummyData: (enable: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -26,9 +28,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const setTheme = (theme: ThemeOption) => setSettings(prev => ({ ...prev, theme }));
   const setLayout = (layout: LayoutOption) => setSettings(prev => ({ ...prev, layout }));
   const setAnalyticsMode = (analyticsMode: AnalyticsMode) => setSettings(prev => ({ ...prev, analyticsMode }));
+  const setEnableDummyData = (enableDummyData: boolean) => setSettings(prev => ({ ...prev, enableDummyData }));
 
   return (
-    <ThemeContext.Provider value={{ ...settings, setTheme, setLayout, setAnalyticsMode }}>
+    <ThemeContext.Provider value={{ ...settings, setTheme, setLayout, setAnalyticsMode, setEnableDummyData }}>
       {children}
     </ThemeContext.Provider>
   );

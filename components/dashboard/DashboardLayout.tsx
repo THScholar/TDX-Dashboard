@@ -28,13 +28,17 @@ const NAV_ITEMS: NavItem[] = [
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLogout }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const { theme } = useTheme(); // Use theme from context
+  const { theme, layout, enableDummyData } = useTheme(); // Use theme, layout and enableDummyData from context
   const [storeName, setStoreName] = useState('');
 
   useEffect(() => {
-    const profile = getStoreProfile();
-    setStoreName(profile.storeName);
-  }, []);
+    if (enableDummyData) {
+      setStoreName('Toko Dummy');
+    } else {
+      const profile = getStoreProfile();
+      setStoreName(profile.storeName);
+    }
+  }, [enableDummyData]);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -89,7 +93,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-slate-950 border-t border-slate-800">
           <button 
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-colors text-sm"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 transition-colors text-sm"
+            style={{ color: 'var(--color-logout-text)' }}
           >
             <LogOut size={18} />
             <span className="font-medium">Keluar</span>
@@ -98,7 +103,12 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-slate-900 transition-colors duration-300">
+      <main className={`flex-1 flex flex-col h-full overflow-hidden relative bg-slate-900 transition-colors duration-300 ${
+        layout === 'modern' ? 'font-sans' :
+        layout === 'simple' ? 'font-mono' :
+        layout === 'analytic' ? 'font-serif' :
+        'font-sans' // Default to font-sans for compact or unknown
+      }`}>
         {/* Mobile Header */}
         <header className="md:hidden h-16 bg-slate-950 border-b border-slate-800 flex items-center px-4 justify-between shrink-0">
           <h1 className="font-bold text-lg text-slate-200">
@@ -111,7 +121,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
         </header>
 
         {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
+        <div className={`flex-1 overflow-y-auto scroll-smooth ${layout === 'compact' ? 'p-2 md:p-4' : layout === 'analytic' ? 'p-6 md:p-10' : 'p-4 md:p-8'}`}>
           <div className="max-w-6xl mx-auto w-full pb-10">
             {children}
           </div>

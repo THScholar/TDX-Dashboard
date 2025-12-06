@@ -1,10 +1,12 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { ThemeOption, LayoutOption, AnalyticsMode } from '../../types';
-import { Monitor, Layout, Check, BarChart2 } from 'lucide-react';
+import { Monitor, Layout, Check, BarChart2, Zap } from 'lucide-react';
+import { useToast } from '../ui/Toast';
 
 export const Settings: React.FC = () => {
-  const { theme, layout, analyticsMode, setTheme, setLayout, setAnalyticsMode } = useTheme();
+  const { theme, layout, analyticsMode, enableDummyData, setTheme, setLayout, setAnalyticsMode, setEnableDummyData } = useTheme();
+  const { showToast } = useToast();
 
   const themes: { id: ThemeOption; name: string; color: string }[] = [
     { id: 'dark', name: 'Dark Default', color: '#0f172a' },
@@ -118,6 +120,34 @@ export const Settings: React.FC = () => {
               </div>
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* Dummy Data Toggle Section */}
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">
+           <Zap size={20} className="text-primary-400" /> Data Dummy
+        </h3>
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="block font-bold text-slate-200">Aktifkan Data Dummy</span>
+            <p className="text-xs text-slate-400 leading-relaxed">Tampilkan data penjualan contoh untuk 1-7 hari terakhir.</p>
+          </div>
+          <button
+            onClick={() => {
+              setEnableDummyData(!enableDummyData);
+              showToast(`Data Dummy ${enableDummyData ? 'dinonaktifkan' : 'diaktifkan'}.`, enableDummyData ? 'info' : 'success');
+            }}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-800 transform active:scale-95
+              ${enableDummyData ? 'bg-primary-600' : 'bg-slate-600'}
+            `}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ease-in-out
+                ${enableDummyData ? 'translate-x-6' : 'translate-x-1'}
+              `}
+            />
+          </button>
         </div>
       </div>
     </div>

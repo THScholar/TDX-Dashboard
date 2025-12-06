@@ -41,6 +41,7 @@
         
         --color-text-main: #f1f5f9;
         --color-text-muted: #94a3b8;
+        --color-logout-text: #ef4444; /* Red-500 for dark */
       }
 
       /* Light Theme */
@@ -56,6 +57,7 @@
 
         --color-text-main: #0f172a;
         --color-text-muted: #64748b;
+        --color-logout-text: #dc2626; /* Red-600 for light */
       }
 
       /* Cyber Blue Theme */
@@ -71,6 +73,7 @@
 
         --color-text-main: #e0faff;
         --color-text-muted: #6b82a0;
+        --color-logout-text: #ffffff; /* White for cyber */
       }
 
       /* Soft Pastel Theme */
@@ -86,6 +89,7 @@
 
         --color-text-main: #4a403a;
         --color-text-muted: #8c7b75;
+        --color-logout-text: #ef4444; /* Red-500 for pastel */
       }
 
       body {
@@ -103,6 +107,14 @@
       [data-theme='pastel'] .text-slate-300 { color: #475569 !important; }
       [data-theme='light'] .text-slate-400,
       [data-theme='pastel'] .text-slate-400 { color: #64748b !important; }
+      [data-theme='light'] .text-slate-500,
+      [data-theme='pastel'] .text-slate-500 { color: #475569 !important; }
+
+      [data-theme='cyber'] .text-slate-100 { color: var(--color-text-main) !important; }
+      [data-theme='cyber'] .text-slate-200 { color: #a0aec0 !important; } /* Contoh warna untuk cyber */
+      [data-theme='cyber'] .text-slate-300 { color: #718096 !important; } /* Contoh warna untuk cyber */
+      [data-theme='cyber'] .text-slate-400 { color: #4a5568 !important; } /* Contoh warna untuk cyber */
+      [data-theme='cyber'] .text-slate-500 { color: #2d3748 !important; } /* Contoh warna untuk cyber */
 
       /* Custom scrollbar for dark theme */
       ::-webkit-scrollbar {

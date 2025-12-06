@@ -32,6 +32,7 @@ export interface AppSettings {
   theme: ThemeOption;
   layout: LayoutOption;
   analyticsMode: AnalyticsMode;
+  enableDummyData: boolean;
 }
 
 export interface SalesGoal {

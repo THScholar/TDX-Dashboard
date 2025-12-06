@@ -145,7 +145,7 @@ export const SalesManager: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-slate-100">Hapus Data?</h3>
             </div>
-            <p className="text-slate-400 mb-6">
+            <p className="text-white mb-6">
               Apakah Anda yakin ingin menghapus data penjualan ini? Tindakan ini tidak dapat dibatalkan.
             </p>
             <div className="flex justify-end gap-3">
@@ -159,7 +159,7 @@ export const SalesManager: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-100">Data Penjualan</h2>
-          <p className="text-slate-400 text-sm">Kelola pencatatan transaksi harian Anda.</p>
+          <p className="text-white text-sm">Kelola pencatatan transaksi harian Anda.</p>
         </div>
         <div className="flex gap-3">
            <Button onClick={exportCSV} variant="secondary" className="text-sm">

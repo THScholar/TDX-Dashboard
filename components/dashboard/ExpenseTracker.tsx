@@ -5,8 +5,11 @@ import { ExpenseRecord } from '../../types';
 import { Button } from '../Button';
 import { Wallet, PieChart as PieIcon, Plus } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { useTheme } from '../../contexts/ThemeContext';
+import { Sparkles } from 'lucide-react';
 
 export const ExpenseTracker: React.FC = () => {
+  const { analyticsMode } = useTheme();
   const [expenses, setExpenses] = useState<ExpenseRecord[]>([]);
   const [desc, setDesc] = useState('');
   const [amount, setAmount] = useState<number | ''>('');
@@ -57,101 +60,111 @@ export const ExpenseTracker: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Form Section */}
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-100 flex items-center gap-2">
-            <Wallet className="text-primary-400" /> Pencatatan Pengeluaran
-          </h2>
-          <p className="text-slate-400 text-sm mt-1">AI akan otomatis mengkategorikan pengeluaran Anda.</p>
-        </div>
-
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-          <form onSubmit={handleAdd} className="space-y-4">
+      {analyticsMode !== 'basic' ? (
+        <>
+          {/* Form Section */}
+          <div className="space-y-6">
             <div>
-              <label className="text-sm text-slate-400">Deskripsi Pengeluaran</label>
-              <input 
-                type="text" 
-                className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-slate-200 mt-1 focus:ring-1 focus:ring-primary-500 outline-none"
-                placeholder="Contoh: Beli token listrik, Beli stok kopi..."
-                value={desc}
-                onChange={e => setDesc(e.target.value)}
-                required
-              />
+              <h2 className="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                <Wallet className="text-primary-400" /> Pencatatan Pengeluaran
+              </h2>
+              <p className="text-slate-400 text-sm mt-1">AI akan otomatis mengkategorikan pengeluaran Anda.</p>
             </div>
-            <div>
-              <label className="text-sm text-slate-400">Nominal (Rp)</label>
-              <input 
-                type="number" 
-                className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-slate-200 mt-1 focus:ring-1 focus:ring-primary-500 outline-none"
-                value={amount}
-                onChange={e => setAmount(Number(e.target.value))}
-                required
-              />
-            </div>
-            <Button type="submit" isLoading={isProcessing} className="w-full">
-              <Plus size={18} /> Tambah & Analisis AI
-            </Button>
-          </form>
-        </div>
 
-        {/* Recent List */}
-        <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="p-4 bg-slate-900/50 text-sm font-semibold text-slate-300">Riwayat Terakhir</div>
-          <div className="divide-y divide-slate-700 max-h-[300px] overflow-y-auto">
-            {expenses.slice().reverse().map(exp => (
-              <div key={exp.id} className="p-4 flex justify-between items-center hover:bg-slate-700/30">
+            <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+              <form onSubmit={handleAdd} className="space-y-4">
                 <div>
-                  <div className="font-medium text-slate-200">{exp.description}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">{exp.date} • <span className="text-primary-400">{exp.category}</span></div>
+                  <label className="text-sm text-slate-400">Deskripsi Pengeluaran</label>
+                  <input 
+                    type="text" 
+                    className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-slate-200 mt-1 focus:ring-1 focus:ring-primary-500 outline-none"
+                    placeholder="Contoh: Beli token listrik, Beli stok kopi..."
+                    value={desc}
+                    onChange={e => setDesc(e.target.value)}
+                    required
+                  />
                 </div>
-                <div className="font-mono text-red-400">-Rp {exp.amount.toLocaleString('id-ID')}</div>
-              </div>
-            ))}
-            {expenses.length === 0 && <div className="p-4 text-center text-slate-500 text-sm">Belum ada data.</div>}
-          </div>
-        </div>
-      </div>
-
-      {/* Chart Section */}
-      <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg flex flex-col">
-        <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2 mb-6">
-          <PieIcon className="text-purple-400" /> Proporsi Pengeluaran
-        </h3>
-        <div className="flex-1 min-h-[300px]">
-          {chartData.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(val) => `Rp ${Number(val).toLocaleString('id-ID')}`} />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="h-full flex items-center justify-center text-slate-500 text-sm">
-              Grafik akan muncul setelah ada data.
+                <div>
+                  <label className="text-sm text-slate-400">Nominal (Rp)</label>
+                  <input 
+                    type="number" 
+                    className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-slate-200 mt-1 focus:ring-1 focus:ring-primary-500 outline-none"
+                    value={amount}
+                    onChange={e => setAmount(Number(e.target.value))}
+                    required
+                  />
+                </div>
+                <Button type="submit" isLoading={isProcessing} className="w-full">
+                  <Plus size={18} /> Tambah & Analisis AI
+                </Button>
+              </form>
             </div>
-          )}
+
+            {/* Recent List */}
+            <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+              <div className="p-4 bg-slate-900/50 text-sm font-semibold text-slate-300">Riwayat Terakhir</div>
+              <div className="divide-y divide-slate-700 max-h-[300px] overflow-y-auto">
+                {expenses.slice().reverse().map(exp => (
+                  <div key={exp.id} className="p-4 flex justify-between items-center hover:bg-slate-700/30">
+                    <div>
+                      <div className="font-medium text-slate-200">{exp.description}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{exp.date} • <span className="text-primary-400">{exp.category}</span></div>
+                    </div>
+                    <div className="font-mono text-red-400">-Rp {exp.amount.toLocaleString('id-ID')}</div>
+                  </div>
+                ))}
+                {expenses.length === 0 && <div className="p-4 text-center text-slate-500 text-sm">Belum ada data.</div>}
+              </div>
+            </div>
+          </div>
+
+          {/* Chart Section */}
+          <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg flex flex-col">
+            <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2 mb-6">
+              <PieIcon className="text-purple-400" /> Proporsi Pengeluaran
+            </h3>
+            <div className="flex-1 min-h-[300px]">
+              {chartData.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={chartData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={100}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(val) => `Rp ${Number(val).toLocaleString('id-ID')}`} />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-slate-500 text-sm">
+                  Grafik akan muncul setelah ada data.
+                </div>
+              )}
+            </div>
+            <div className="mt-4 p-4 bg-slate-900/50 rounded-lg text-center">
+              <p className="text-xs text-white mb-1">Total Pengeluaran</p>
+              <p className="text-2xl font-bold text-slate-100">
+                Rp {expenses.reduce((a, b) => a + b.amount, 0).toLocaleString('id-ID')}
+              </p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center h-full text-slate-400 py-10 col-span-full">
+          <Sparkles size={48} className="mb-4 text-primary-500" />
+          <p className="text-lg font-semibold">Mode Analitik Basic tidak menyertakan Pencatatan Pengeluaran.</p>
+          <p className="text-center">Silakan beralih ke Mode Analitik Advanced atau Forecast di Pengaturan untuk menggunakan fitur ini.</p>
         </div>
-        <div className="mt-4 p-4 bg-slate-900/50 rounded-lg text-center">
-          <p className="text-xs text-slate-400 mb-1">Total Pengeluaran</p>
-          <p className="text-2xl font-bold text-slate-100">
-            Rp {expenses.reduce((a, b) => a + b.amount, 0).toLocaleString('id-ID')}
-          </p>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

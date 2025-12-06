@@ -4,8 +4,11 @@ import { getUserName } from '../../services/storageService';
 import { ChatMessage } from '../../types';
 import { Button } from '../Button';
 import { Send, User } from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
+import { Sparkles } from 'lucide-react';
 
 export const AiChat: React.FC = () => {
+  const { analyticsMode } = useTheme();
   // Initialize user name and greeting
   const [userName] = useState<string>(() => getUserName());
   
@@ -75,76 +78,86 @@ export const AiChat: React.FC = () => {
 
   return (
     <div className="h-[75vh] min-h-[500px] flex flex-col bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-xl">
-      <div className="p-4 border-b border-slate-700 bg-slate-900/50 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-primary-600/20">
-          <img src="../../images/therra.png" alt="Therra AI" className="w-full h-full object-cover rounded-full" />
-        </div>
-        <div>
-          <h3 className="font-semibold text-slate-100">Therra AI Assistant</h3>
-          <p className="text-xs text-slate-400">Smart Business Consultant</p>
-        </div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-800/50">
-        {messages.map((msg) => (
-          <div 
-            key={msg.id} 
-            className={`flex items-start gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
-          >
-            <div className={`
-              w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden
-              ${msg.role === 'user' ? 'bg-slate-600' : 'bg-primary-600/20'}
-            `}>
-              {msg.role === 'user' ? (
-                <User size={14} />
-              ) : (
-                <img src="/src/images/Therra.png" alt="AI" className="w-full h-full object-cover" />
-              )}
+      {analyticsMode !== 'basic' ? (
+        <>
+          <div className="p-4 border-b border-slate-700 bg-slate-900/50 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-primary-600/20">
+              <img src="../../images/therra.png" alt="Therra AI" className="w-full h-full object-cover rounded-full" />
             </div>
-            <div className={`
-              max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm
-              ${msg.role === 'user' 
-                ? 'bg-slate-700 text-slate-100 rounded-tr-none' 
-                : 'bg-primary-900/30 text-slate-200 border border-primary-500/20 rounded-tl-none'}
-            `}>
-              {msg.text.split('\n').map((line, i) => (
-                <p key={i} className={i > 0 ? 'mt-2' : ''}>{line}</p>
-              ))}
+            <div>
+              <h3 className="font-semibold text-slate-100">Therra AI Assistant</h3>
+              <p className="text-xs text-white">Smart Business Consultant</p>
             </div>
           </div>
-        ))}
-        {isLoading && (
-          <div className="flex items-center gap-2 text-slate-500 text-sm ml-12">
-            <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce"></span>
-            <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-75"></span>
-            <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-150"></span>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
-      </div>
 
-      <div className="p-4 bg-slate-900/80 border-t border-slate-700 backdrop-blur-sm">
-        <form onSubmit={handleSend} className="flex gap-2">
-          <input
-            type="text"
-            className="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all placeholder:text-slate-500"
-            placeholder={cooldown > 0 ? `Tunggu ${cooldown}s...` : "Ketik pesan..."}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={isLoading || cooldown > 0}
-          />
-          <Button 
-            type="submit" 
-            disabled={isLoading || !input.trim() || cooldown > 0}
-            className="w-12 h-12 !px-0 rounded-xl flex items-center justify-center"
-          >
-            <Send size={18} />
-          </Button>
-        </form>
-        <p className="text-center text-[10px] text-slate-500 mt-2">
-          Therra AI mungkin membuat kesalahan. Cek kembali informasi penting.
-        </p>
-      </div>
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-800/50">
+            {messages.map((msg) => (
+              <div 
+                key={msg.id} 
+                className={`flex items-start gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+              >
+                <div className={`
+                  w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden
+                  ${msg.role === 'user' ? 'bg-slate-600' : 'bg-primary-600/20'}
+                `}>
+                  {msg.role === 'user' ? (
+                    <User size={14} />
+                  ) : (
+                    <img src="/src/images/Therra.png" alt="AI" className="w-full h-full object-cover" />
+                  )}
+                </div>
+                <div className={`
+                  max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm
+                  ${msg.role === 'user' 
+                    ? 'bg-slate-700 text-slate-100 rounded-tr-none' 
+                    : 'bg-primary-900/30 text-slate-200 border border-primary-500/20 rounded-tl-none'}
+                `}>
+                  {msg.text.split('\n').map((line, i) => (
+                    <p key={i} className={i > 0 ? 'mt-2' : ''}>{line}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="flex items-center gap-2 text-slate-500 text-sm ml-12">
+                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce"></span>
+                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-75"></span>
+                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-150"></span>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="p-4 bg-slate-900/80 border-t border-slate-700 backdrop-blur-sm">
+            <form onSubmit={handleSend} className="flex gap-2">
+              <input
+                type="text"
+                className="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all placeholder:text-slate-500"
+                placeholder={cooldown > 0 ? `Tunggu ${cooldown}s...` : "Ketik pesan..."}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                disabled={isLoading || cooldown > 0}
+              />
+              <Button 
+                type="submit" 
+                disabled={isLoading || !input.trim() || cooldown > 0}
+                className="w-12 h-12 !px-0 rounded-xl flex items-center justify-center"
+              >
+                <Send size={18} />
+              </Button>
+            </form>
+            <p className="text-center text-[10px] text-slate-500 mt-2">
+              Therra AI mungkin membuat kesalahan. Cek kembali informasi penting.
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center h-full text-slate-400 py-10">
+          <Sparkles size={48} className="mb-4 text-primary-500" />
+          <p className="text-lg font-semibold">Mode Analitik Basic tidak menyertakan Therra AI Chat.</p>
+          <p className="text-center">Silakan beralih ke Mode Analitik Advanced atau Forecast di Pengaturan untuk menggunakan fitur ini.</p>
+        </div>
+      )}
     </div>
   );
 };

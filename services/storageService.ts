@@ -15,6 +15,10 @@ export const EXPENSE_UPDATE_EVENT = 'therrabiz_expenses_updated';
 // --- Sales Data Logic ---
 
 export const getSalesData = (): SaleRecord[] => {
+  const appSettings = getAppSettings();
+  if (appSettings.enableDummyData) {
+    return generateDummySalesData(7); // Generate 7 days of dummy data
+  }
   try {
     const data = localStorage.getItem(STORAGE_KEY);
     return data ? JSON.parse(data) : [];
@@ -60,6 +64,32 @@ export const seedDataIfEmpty = () => {
   // We want the user to start with 0 data.
 };
 
+// --- Dummy Data Generation ---
+const generateDummySalesData = (days: number): SaleRecord[] => {
+  const dummyData: SaleRecord[] = [];
+  const today = new Date();
+
+  for (let i = 0; i < days; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i); // Go back in time for consistency
+
+    const revenue = parseFloat((Math.random() * (5000000 - 1000000) + 1000000).toFixed(2)); // 1M - 5M
+    const transactions = Math.floor(Math.random() * (100 - 20) + 20); // 20 - 100 transactions
+    const topProducts = ['Kopi Susu', 'Roti Bakar', 'Mie Ayam', 'Es Teh', 'Nasi Goreng'];
+    const randomProduct = topProducts[Math.floor(Math.random() * topProducts.length)];
+
+    dummyData.push({
+      id: `dummy-${date.toISOString().split('T')[0]}`,
+      date: date.toISOString().split('T')[0],
+      revenue,
+      transactions,
+      topProduct: randomProduct,
+      notes: 'Dummy sales data',
+    });
+  }
+  return dummyData.reverse(); // Show most recent data last
+};
+
 // --- Store Profile Logic ---
 
 export const saveStoreProfile = (profile: StoreProfile) => {
@@ -88,9 +118,9 @@ export const clearSession = () => {
 export const getAppSettings = (): AppSettings => {
   try {
     const data = localStorage.getItem(SETTINGS_KEY);
-    return data ? JSON.parse(data) : { theme: 'dark', layout: 'modern', analyticsMode: 'basic' };
+    return data ? JSON.parse(data) : { theme: 'dark', layout: 'modern', analyticsMode: 'basic', enableDummyData: false };
   } catch {
-    return { theme: 'dark', layout: 'modern', analyticsMode: 'basic' };
+    return { theme: 'dark', layout: 'modern', analyticsMode: 'basic', enableDummyData: false };
   }
 };
 

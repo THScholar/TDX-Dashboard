@@ -5,8 +5,10 @@ import {
 } from 'recharts';
 import { getSalesData, SALES_UPDATE_EVENT } from '../../services/storageService';
 import { SaleRecord } from '../../types';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export const ChartsView: React.FC = () => {
+  const { analyticsMode } = useTheme();
   const [data, setData] = useState<SaleRecord[]>([]);
   const [productDistribution, setProductDistribution] = useState<{name: string, value: number}[]>([]);
   const [aovData, setAovData] = useState<any[]>([]);
@@ -115,6 +117,7 @@ export const ChartsView: React.FC = () => {
             </ResponsiveContainer>
           </div>
         </div>
+       
 
         {/* 2. Transactions Chart (Bar) */}
         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg w-full">
@@ -147,7 +150,8 @@ export const ChartsView: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. AOV Chart (Area) - NEW */}
+        {/* 3. AOV Chart (Area) - NEW (Hanya tampil di Mode Analitik Advanced/Forecast) */}
+        {analyticsMode !== 'basic' && (
         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg w-full">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -184,8 +188,10 @@ export const ChartsView: React.FC = () => {
             </ResponsiveContainer>
           </div>
         </div>
+        )}
 
-        {/* 4. Product Distribution (Pie) - NEW */}
+        {/* 4. Product Distribution (Pie) - NEW (Hanya tampil di Mode Analitik Advanced/Forecast) */}
+        {analyticsMode !== 'basic' && (
         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg w-full">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -227,7 +233,7 @@ export const ChartsView: React.FC = () => {
             )}
           </div>
         </div>
-
+        )}
       </div>
     </div>
   );
