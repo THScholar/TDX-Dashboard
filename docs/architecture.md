@@ -48,3 +48,32 @@ TherraBiz adalah aplikasi web *single-page application* (SPA) yang dibangun meng
 *   **Reusabilitas**: Komponen UI generik dan logika bisnis dirancang agar dapat digunakan kembali di berbagai bagian aplikasi.
 *   **Responsivitas**: Desain aplikasi dioptimalkan untuk berbagai ukuran layar menggunakan Tailwind CSS, memastikan pengalaman pengguna yang konsisten di perangkat desktop dan seluler.
 *   **Keterpisahan Kekhawatiran (Separation of Concerns)**: Logika UI, manajemen state, dan interaksi API dipisahkan ke dalam modul dan layanan yang berbeda untuk menjaga kode tetap bersih dan mudah dikelola.
+
+## 5. Struktur Direktori
+
+Berikut adalah gambaran umum struktur direktori utama proyek:
+
+```
+.
+├── public/
+│   └── ... (aset statis seperti index.html, favicon)
+├── src/
+│   ├── assets/
+│   │   └── ... (gambar, ikon, font)
+│   ├── components/
+│   │   ├── dashboard/ (komponen spesifik dashboard)
+│   │   └── ui/ (komponen UI generik)
+│   ├── contexts/ (konteks React untuk state global)
+│   ├── hooks/ (custom React hooks)
+│   ├── services/ (layanan untuk interaksi API, penyimpanan lokal)
+│   ├── types/ (definisi tipe TypeScript)
+│   ├── utils/ (fungsi utilitas)
+│   ├── App.tsx (komponen utama aplikasi, routing)
+│   ├── main.tsx (entry point React)
+│   └── index.css (global CSS)
+├── docs/ (dokumentasi proyek)
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
