@@ -101,7 +101,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
       <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-slate-900 transition-colors duration-300">
         {/* Mobile Header */}
         <header className="md:hidden h-16 bg-slate-950 border-b border-slate-800 flex items-center px-4 justify-between shrink-0">
-          <h1 className="font-bold text-lg text-slate-200">{storeName}</h1>
+          <h1 className="font-bold text-lg text-slate-200">
+            Dashboard
+            <span className="block text-sm font-semibold text-slate-400">{storeName}</span>
+          </h1>
           <button onClick={toggleSidebar} className="text-slate-400">
             <Menu size={24} />
           </button>
