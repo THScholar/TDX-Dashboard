@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TherraBiz - Smart UMKM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                800: 'var(--color-slate-800)',
+                850: 'var(--color-slate-850)',
+                900: 'var(--color-slate-900)',
+                950: 'var(--color-slate-950)',
+              },
+              primary: {
+                400: 'var(--color-primary-400)',
+                500: 'var(--color-primary-500)',
+                600: 'var(--color-primary-600)',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Default (Dark/Modern) */
+      :root {
+        --color-slate-800: #1e293b;
+        --color-slate-850: #151f32;
+        --color-slate-900: #0f172a;
+        --color-slate-950: #020617;
+        
+        --color-primary-400: #22d3ee;
+        --color-primary-500: #06b6d4;
+        --color-primary-600: #0891b2;
+        
+        --color-text-main: #f1f5f9;
+        --color-text-muted: #94a3b8;
+      }
+
+      /* Light Theme */
+      [data-theme='light'] {
+        --color-slate-800: #ffffff;
+        --color-slate-850: #f1f5f9;
+        --color-slate-900: #f8fafc;
+        --color-slate-950: #e2e8f0;
+
+        --color-primary-400: #0ea5e9;
+        --color-primary-500: #0284c7;
+        --color-primary-600: #0369a1;
+
+        --color-text-main: #0f172a;
+        --color-text-muted: #64748b;
+      }
+
+      /* Cyber Blue Theme */
+      [data-theme='cyber'] {
+        --color-slate-800: #091026;
+        --color-slate-850: #050a1f;
+        --color-slate-900: #020410;
+        --color-slate-950: #000000;
+
+        --color-primary-400: #00ffea;
+        --color-primary-500: #00dcd0;
+        --color-primary-600: #00a49d;
+
+        --color-text-main: #e0faff;
+        --color-text-muted: #6b82a0;
+      }
+
+      /* Soft Pastel Theme */
+      [data-theme='pastel'] {
+        --color-slate-800: #fff0f5; /* Lavender Blush */
+        --color-slate-850: #ffe4e1;
+        --color-slate-900: #fff5ee; /* Seashell */
+        --color-slate-950: #faebd7; /* AntiqueWhite */
+
+        --color-primary-400: #ffb7b2;
+        --color-primary-500: #ff9e99;
+        --color-primary-600: #ff6f69;
+
+        --color-text-main: #4a403a;
+        --color-text-muted: #8c7b75;
+      }
+
+      body {
+        background-color: var(--color-slate-900);
+        color: var(--color-text-main);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Fix specific text overrides for themes */
+      [data-theme='light'] .text-slate-100,
+      [data-theme='pastel'] .text-slate-100 { color: var(--color-text-main) !important; }
+      [data-theme='light'] .text-slate-200,
+      [data-theme='pastel'] .text-slate-200 { color: #334155 !important; }
+      [data-theme='light'] .text-slate-300,
+      [data-theme='pastel'] .text-slate-300 { color: #475569 !important; }
+      [data-theme='light'] .text-slate-400,
+      [data-theme='pastel'] .text-slate-400 { color: #64748b !important; }
+
+      /* Custom scrollbar for dark theme */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-slate-900); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #475569; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
