@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, LineChart, Bot, Sparkles, Calculator, LogOut, Menu, X, Save, Settings as SettingsIcon, BrainCircuit, Activity, Tag, BarChart4, Wallet } from 'lucide-react';
 import { NavItem } from '../../types';
 import { useTheme } from '../../contexts/ThemeContext';
+import { getStoreProfile } from '../../services/storageService';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -28,6 +29,12 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const { theme } = useTheme(); // Use theme from context
+  const [storeName, setStoreName] = useState('');
+
+  useEffect(() => {
+    const profile = getStoreProfile();
+    setStoreName(profile.storeName);
+  }, []);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -49,7 +56,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
       `}>
         <div className="p-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            TherraBiz
+            {storeName}
           </h1>
           <button onClick={toggleSidebar} className="md:hidden text-slate-400">
             <X size={24} />
@@ -93,7 +100,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onLo
       <main className="flex-1 flex flex-col h-full overflow-hidden relative bg-slate-900 transition-colors duration-300">
         {/* Mobile Header */}
         <header className="md:hidden h-16 bg-slate-950 border-b border-slate-800 flex items-center px-4 justify-between shrink-0">
-          <h1 className="font-bold text-lg text-slate-200">TherraBiz</h1>
+          <h1 className="font-bold text-lg text-slate-200">{storeName}</h1>
           <button onClick={toggleSidebar} className="text-slate-400">
             <Menu size={24} />
           </button>
