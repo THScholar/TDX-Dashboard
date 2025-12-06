@@ -17,7 +17,7 @@ Dokumen ini menjelaskan bagaimana fitur-fitur berbasis AI diimplementasikan dan 
 
 ## 4. Pengeluaran (AI)
 - **Fungsi**: Membantu melacak dan menganalisis pengeluaran bisnis, mungkin dengan kategorisasi otomatis atau deteksi anomali.
-- **Implementasi**: (Detail implementasi AI untuk pengeluaran akan ditambahkan di sini, misalnya, pemrosesan bahasa alami untuk kategorisasi, model deteksi anomali, dll.)
+- **Implementasi**: Menggunakan teknik *Natural Language Processing* (NLP) untuk mengkategorikan deskripsi pengeluaran secara otomatis. Deteksi anomali dapat diterapkan untuk mengidentifikasi pengeluaran yang tidak biasa atau berpotensi mencurigakan berdasarkan pola historis.
 
 ## 5. Estimasi Promo
 - **Fungsi**: Memberikan estimasi dampak promosi yang berbeda terhadap penjualan atau metrik bisnis lainnya.

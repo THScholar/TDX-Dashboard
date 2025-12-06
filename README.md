@@ -83,7 +83,6 @@ yarn dev
 ```
 
 Aplikasi akan berjalan di `http://localhost:3000` (atau port lain yang dikonfigurasi).
-
 ### Login Aplikasi
 
 Untuk login ke aplikasi, gunakan kredensial berikut:
@@ -91,7 +90,6 @@ Untuk login ke aplikasi, gunakan kredensial berikut:
 *   **Nama Pemilik**: `[Nama Anda]`
 *   **Nama Toko**: `[Nama Toko Anda]`
 *   **Password**: `TherraBizDemo` (wajib)
-
 ### Build Produksi
 
 ```bash
