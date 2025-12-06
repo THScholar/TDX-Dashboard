@@ -54,11 +54,11 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal di sistem Anda:
 *   npm atau Yarn
 
 ### Instalasi
-
+```
 1.  **Clone repositori:**
     ```bash
     git clone https://github.com/THScholar/TDX-Dashboard
-    cd TDX
+    cd TDX-Dashboard
     ```
 2.  **Instal dependensi:**
     ```bash
@@ -67,7 +67,7 @@ Pastikan Anda memiliki perangkat lunak berikut terinstal di sistem Anda:
     yarn install
     ```
 3.  **Konfigurasi Environment:**
-    Buat file `.env` di root proyek dan tambahkan variabel lingkungan berikut:
+    Buat file `.env` di root proyek dan tambahkan variabel lingkungan berikut (wajib):
     ```
     VITE_OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
     ```
@@ -144,7 +144,7 @@ Proyek ini dilisensikan di bawah Lisensi MIT. Lihat file [LICENSE](LICENSE) untu
 
 ## 8. Attribution
 
-*   **TherraBiz**: Dibuat oleh [Nama Anda/Organisasi Anda]
+*   **TherraBiz**: Dibuat oleh Team TH Nexus
 *   **Ikon**: [Lucide React](https://lucide.dev/)
 *   **Animasi**: [Framer Motion](https://www.framer.com/motion/)
 *   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
@@ -166,3 +166,8 @@ Kami berkomitmen untuk menjaga kualitas kode yang tinggi. Proyek ini mengikuti p
 *   **Type Checking**: Menggunakan TypeScript untuk memastikan keamanan tipe.
 *   **Pengujian**: <!-- Placeholder: Informasi tentang pengujian (misalnya, Jest, React Testing Library) -->
 *   **Performa**: Dioptimalkan untuk kecepatan dan responsivitas.
+
+## Pengembang & Desainer
+
+*   **Developer**: Muhamad Dzarel Alghifari
+*   **Design**: Fadly Akbar & Muhammad Fahri
