@@ -23,11 +23,12 @@ Proyek ini dibangun dengan fokus pada pengalaman pengguna yang responsif dan efi
 
 ## 2. Screenshots / Demo
 
-![Dashboard Screenshot](/src/images/dashboard.png) <!-- Placeholder for dashboard screenshot -->
-![Settings Screenshot](/src/images/settings.png) <!-- Placeholder for settings screenshot -->
-
-<!-- You can embed a GIF or video here for a live demo -->
-<!-- <img src="link-to-your-demo.gif" alt="TherraBiz Live Demo" /> -->
+![Dashboard Screenshot](/src/images/dashboard.png) 
+---
+![Settings Screenshot](/src/images/settings.png) 
+-----
+<!-- GitHub README.md tidak mendukung pemutaran video MP4 secara langsung. Anda bisa menautkan ke file MP4, tetapi pengguna perlu mengunduh atau membukanya di tab baru. Untuk pemutaran otomatis, pertimbangkan GIF atau tautan ke platform video eksternal. -->
+[Lihat Demo Mobile (MOV)](demo.mov)
 
 ## 3. Features
 
