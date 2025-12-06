@@ -82,7 +82,7 @@ export const AiChat: React.FC = () => {
         <>
           <div className="p-4 border-b border-slate-700 bg-slate-900/50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-primary-600/20">
-              <img src="../../images/therra.png" alt="Therra AI" className="w-full h-full object-cover rounded-full" />
+              <img src="../../images/therra.png" alt="Therra AI Assistant" className="w-full h-full object-cover rounded-full" />
             </div>
             <div>
               <h3 className="font-semibold text-slate-100">Therra AI Assistant</h3>
