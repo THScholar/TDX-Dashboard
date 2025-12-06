@@ -317,7 +317,7 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
         <div className="text-center text-slate-600 text-sm pt-8 border-t border-slate-900">
-          <p>&copy; {new Date().getFullYear()} TherraBiz Project. Dibuat dengan ❤️ untuk UMKM Indonesia.</p>
+          <p>Made By Team TH Nexus For UMKM Indonesia</p>
         </div>
       </footer>
     </div>
