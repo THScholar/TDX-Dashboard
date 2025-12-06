@@ -19,7 +19,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Pengeluaran (AI)', path: '/dashboard/expenses', icon: Wallet },
   { label: 'Estimasi Promo', path: '/dashboard/promo', icon: Tag },
   { label: 'What-If Simulator', path: '/dashboard/simulator', icon: BrainCircuit },
-  { label: 'Therra AI Chat', path: '/dashboard/chat', icon: Bot },
+  { label: 'Therra AI Chat', path: '/dashboard/chat', icon: () => <span className="font-bold text-lg">T</span> },
   { label: 'Smart Insight', path: '/dashboard/insight', icon: Sparkles },
   { label: 'Kalkulator', path: '/dashboard/calculator', icon: Calculator },
   { label: 'Pengaturan', path: '/dashboard/settings', icon: SettingsIcon },
